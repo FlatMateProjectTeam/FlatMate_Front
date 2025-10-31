@@ -21,14 +21,20 @@ export const Header = () => {
       <div className="container flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-2">
           <MobileNav />
-          <Link to="/" className="flex items-center">
-            <img 
-              
-              src={logoFlatmate} 
-              alt="FlatMate - Finding Your Housemate" 
-              className="h-24 w-auto object-contain"
-            />
-          </Link>
+            <Link to="/" className="flex items-center">
+      <img
+        src={logoFlatmate}
+        alt="FlatMate - Finding Your Housemate"
+        className="
+          h-10 md:h-12 lg:h-14
+          w-auto
+          object-contain
+          transition-all
+          duration-300
+          hover:scale-105
+        "
+      />
+    </Link>
         </div>
 
         <nav className="hidden md:flex items-center gap-6">
