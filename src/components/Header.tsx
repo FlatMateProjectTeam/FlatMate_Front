@@ -26,7 +26,7 @@ export const Header = () => {
         src={logoFlatmate}
         alt="FlatMate - Finding Your Housemate"
         className="
-          h-20 md:h-12 lg:h-14
+          h-20 md:h-18 lg:h-24
           w-auto
           object-contain
           transition-all
