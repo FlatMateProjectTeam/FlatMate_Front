@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "matches": "Matches",
+    "messages": "Messages",
+    "profile": "Profile",
+    "preferences": "Preferences",
+    "logout": "Logout",
+    "login": "Login",
+    "signup": "Sign Up"
+  },
+  "hero": {
+    "title": "Find Your Perfect Roommate & Home",
+    "subtitle": "AI-powered matching connects you with compatible roommates and ideal housing in Morocco",
+    "cta": {
+      "roommates": "Find Roommates",
+      "housing": "Find Housing"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back",
+      "subtitle": "Login to continue your search",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Login",
+      "forgot": "Forgot password?",
+      "noAccount": "Don't have an account?",
+      "signupLink": "Sign up"
+    },
+    "signup": {
+      "title": "Join FlatMate",
+      "subtitle": "Create your account to get started",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Create Account",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Login"
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "stats": {
+      "profileCompletion": "Profile Completion",
+      "matches": "New Matches",
+      "messages": "Unread Messages",
+      "views": "Profile Views"
+    },
+    "quickActions": "Quick Actions",
+    "recentActivity": "Recent Activity"
+  },
+  "preferences": {
+    "title": "Your Preferences",
+    "subtitle": "Help us find your perfect match",
+    "tabs": {
+      "roommate": "Roommate Preferences",
+      "housing": "Housing Preferences"
+    },
+    "roommate": {
+      "ageRange": "Age Range",
+      "gender": "Gender",
+      "pets": "Pets Allowed",
+      "smoking": "Smoking",
+      "cleanliness": "Cleanliness Level",
+      "sociability": "Sociability",
+      "workSchedule": "Work Schedule",
+      "sleepSchedule": "Sleep Schedule"
+    },
+    "housing": {
+      "city": "City",
+      "type": "Property Type",
+      "bedrooms": "Bedrooms",
+      "budget": "Monthly Budget (MAD)",
+      "furnished": "Furnished",
+      "amenities": "Amenities",
+      "moveInDate": "Move-in Date"
+    },
+    "save": "Save Preferences"
+  },
+  "matches": {
+    "title": "Your Matches",
+    "subtitle": "Swipe to find your perfect roommate",
+    "compatibility": "Compatibility",
+    "like": "Like",
+    "pass": "Pass",
+    "noMore": "No more matches available",
+    "checkLater": "Check back later for new matches"
+  },
+  "messages": {
+    "title": "Messages",
+    "noConversations": "No conversations yet",
+    "startMatching": "Start matching to begin conversations",
+    "typeMessage": "Type a message...",
+    "send": "Send"
+  },
+  "profile": {
+    "title": "Your Profile",
+    "edit": "Edit Profile",
+    "save": "Save Changes",
+    "about": "About",
+    "preferences": "Preferences",
+    "photos": "Photos",
+    "uploadPhoto": "Upload Photo"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success!",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "back": "Back",
+    "next": "Next"
+  }
+}

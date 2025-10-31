@@ -1,0 +1,121 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "dashboard": "Tableau de bord",
+    "matches": "Correspondances",
+    "messages": "Messages",
+    "profile": "Profil",
+    "preferences": "Préférences",
+    "logout": "Déconnexion",
+    "login": "Connexion",
+    "signup": "S'inscrire"
+  },
+  "hero": {
+    "title": "Trouvez Votre Colocataire et Logement Parfaits",
+    "subtitle": "Le matching alimenté par l'IA vous connecte avec des colocataires compatibles et des logements idéaux au Maroc",
+    "cta": {
+      "roommates": "Trouver des Colocataires",
+      "housing": "Trouver un Logement"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Bon Retour",
+      "subtitle": "Connectez-vous pour continuer votre recherche",
+      "email": "Email",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "forgot": "Mot de passe oublié?",
+      "noAccount": "Pas encore de compte?",
+      "signupLink": "S'inscrire"
+    },
+    "signup": {
+      "title": "Rejoignez FlatMate",
+      "subtitle": "Créez votre compte pour commencer",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Email",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "submit": "Créer un compte",
+      "hasAccount": "Vous avez déjà un compte?",
+      "loginLink": "Se connecter"
+    }
+  },
+  "dashboard": {
+    "welcome": "Bienvenue",
+    "stats": {
+      "profileCompletion": "Profil Complété",
+      "matches": "Nouvelles Correspondances",
+      "messages": "Messages Non Lus",
+      "views": "Vues du Profil"
+    },
+    "quickActions": "Actions Rapides",
+    "recentActivity": "Activité Récente"
+  },
+  "preferences": {
+    "title": "Vos Préférences",
+    "subtitle": "Aidez-nous à trouver votre match parfait",
+    "tabs": {
+      "roommate": "Préférences de Colocataire",
+      "housing": "Préférences de Logement"
+    },
+    "roommate": {
+      "ageRange": "Tranche d'âge",
+      "gender": "Genre",
+      "pets": "Animaux autorisés",
+      "smoking": "Fumeur",
+      "cleanliness": "Niveau de propreté",
+      "sociability": "Sociabilité",
+      "workSchedule": "Horaire de travail",
+      "sleepSchedule": "Horaire de sommeil"
+    },
+    "housing": {
+      "city": "Ville",
+      "type": "Type de propriété",
+      "bedrooms": "Chambres",
+      "budget": "Budget mensuel (MAD)",
+      "furnished": "Meublé",
+      "amenities": "Équipements",
+      "moveInDate": "Date d'emménagement"
+    },
+    "save": "Enregistrer les préférences"
+  },
+  "matches": {
+    "title": "Vos Correspondances",
+    "subtitle": "Swipez pour trouver votre colocataire parfait",
+    "compatibility": "Compatibilité",
+    "like": "J'aime",
+    "pass": "Passer",
+    "noMore": "Plus de correspondances disponibles",
+    "checkLater": "Revenez plus tard pour de nouvelles correspondances"
+  },
+  "messages": {
+    "title": "Messages",
+    "noConversations": "Aucune conversation",
+    "startMatching": "Commencez à matcher pour démarrer des conversations",
+    "typeMessage": "Tapez un message...",
+    "send": "Envoyer"
+  },
+  "profile": {
+    "title": "Votre Profil",
+    "edit": "Modifier le profil",
+    "save": "Enregistrer les modifications",
+    "about": "À propos",
+    "preferences": "Préférences",
+    "photos": "Photos",
+    "uploadPhoto": "Télécharger une photo"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "success": "Succès!",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "save": "Enregistrer",
+    "back": "Retour",
+    "next": "Suivant"
+  }
+}
