@@ -57,6 +57,8 @@
   "preferences": {
     "title": "Your Preferences",
     "subtitle": "Help us find your perfect match",
+    "findingHome": "Finding your perfect home...",
+    "findingRoommate": "Finding your perfect flatmate...",
     "tabs": {
       "roommate": "Roommate Preferences",
       "housing": "Housing Preferences"
@@ -90,6 +92,26 @@
     "pass": "Pass",
     "noMore": "No more matches available",
     "checkLater": "Check back later for new matches"
+  },
+  "housingMatches": {
+    "title": "🏠 We found {{count}} housing matches for you!",
+    "subtitle": "Browse apartments that match your preferences",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "wifi": "WiFi",
+    "parking": "Parking",
+    "contactOwner": "💬 Contact Owner"
+  },
+  "roommateMatches": {
+    "title": "🎉 We found {{count}} compatible roommates!",
+    "subtitle": "Connect with people looking for flatmates",
+    "budget": "Budget",
+    "nonSmoker": "Non-smoker",
+    "petFriendly": "Pet-friendly",
+    "nightOwl": "Night owl",
+    "earlyBird": "Early bird",
+    "cleanOrganized": "Clean & organized",
+    "message": "💬 Message"
   },
   "messages": {
     "title": "Messages",

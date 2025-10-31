@@ -57,6 +57,8 @@
   "preferences": {
     "title": "Vos Préférences",
     "subtitle": "Aidez-nous à trouver votre match parfait",
+    "findingHome": "Recherche de votre logement idéal...",
+    "findingRoommate": "Recherche de votre colocataire idéal...",
     "tabs": {
       "roommate": "Préférences de Colocataire",
       "housing": "Préférences de Logement"
@@ -90,6 +92,26 @@
     "pass": "Passer",
     "noMore": "Plus de correspondances disponibles",
     "checkLater": "Revenez plus tard pour de nouvelles correspondances"
+  },
+  "housingMatches": {
+    "title": "🏠 Nous avons trouvé {{count}} logements pour vous!",
+    "subtitle": "Parcourez les appartements qui correspondent à vos préférences",
+    "bedrooms": "Chambres",
+    "bathrooms": "Salles de bain",
+    "wifi": "WiFi",
+    "parking": "Parking",
+    "contactOwner": "💬 Contacter le propriétaire"
+  },
+  "roommateMatches": {
+    "title": "🎉 Nous avons trouvé {{count}} colocataires compatibles!",
+    "subtitle": "Connectez-vous avec des personnes cherchant des colocataires",
+    "budget": "Budget",
+    "nonSmoker": "Non-fumeur",
+    "petFriendly": "Animaux acceptés",
+    "nightOwl": "Couche-tard",
+    "earlyBird": "Lève-tôt",
+    "cleanOrganized": "Propre et organisé",
+    "message": "💬 Message"
   },
   "messages": {
     "title": "Messages",

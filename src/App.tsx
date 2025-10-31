@@ -15,6 +15,8 @@ import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Preferences from './pages/Preferences';
 import Matches from './pages/Matches';
+import HousingMatches from './pages/HousingMatches';
+import RoommateMatches from './pages/RoommateMatches';
 import Messages from './pages/Messages';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
@@ -67,6 +69,22 @@ const AppContent = () => {
           element={
             <ProtectedRoute>
               <Matches />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/housing-matches"
+          element={
+            <ProtectedRoute>
+              <HousingMatches />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/roommate-matches"
+          element={
+            <ProtectedRoute>
+              <RoommateMatches />
             </ProtectedRoute>
           }
         />

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,10 +11,14 @@ import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { motion } from 'framer-motion';
 import { toast } from 'react-hot-toast';
-import { Users, Home } from 'lucide-react';
+import { Users, Home, Loader2 } from 'lucide-react';
 
 const Preferences = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState<'roommate' | 'housing'>('roommate');
+  const [isLoading, setIsLoading] = useState(false);
+  
   const [roommatePrefs, setRoommatePrefs] = useState({
     ageMin: 18,
     ageMax: 35,
@@ -31,8 +36,21 @@ const Preferences = () => {
     furnished: true,
   });
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    setIsLoading(true);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
     toast.success(t('common.success'));
+    setIsLoading(false);
+    
+    // Navigate to appropriate matches page
+    if (activeTab === 'housing') {
+      navigate('/housing-matches');
+    } else {
+      navigate('/roommate-matches');
+    }
   };
 
   return (
@@ -49,7 +67,7 @@ const Preferences = () => {
 
         <Card className="card-elevated">
           <CardContent className="p-6">
-            <Tabs defaultValue="roommate" className="w-full">
+            <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'roommate' | 'housing')} className="w-full">
               <TabsList className="grid w-full grid-cols-2 mb-6">
                 <TabsTrigger value="roommate" className="gap-2">
                   <Users className="h-4 w-4" />
@@ -185,8 +203,17 @@ const Preferences = () => {
             </Tabs>
 
             <div className="mt-6 flex justify-end">
-              <Button onClick={handleSave} size="lg">
-                {t('preferences.save')}
+              <Button onClick={handleSave} size="lg" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    {activeTab === 'housing' 
+                      ? t('preferences.findingHome') 
+                      : t('preferences.findingRoommate')}
+                  </>
+                ) : (
+                  t('preferences.save')
+                )}
               </Button>
             </div>
           </CardContent>
