@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAppStore } from './store/useAppStore';
 import { Header } from './components/Header';
+import { AiAssistant } from './components/AiAssistant';
 
 import Landing from './pages/Landing';
 import Login from './pages/Login';
@@ -40,6 +41,7 @@ const AppContent = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <AiAssistant />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
