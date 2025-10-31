@@ -5,73 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { motion } from 'framer-motion';
 import { User, MapPin, Briefcase, Heart, MessageCircle, Star, Moon, Sun, Home as HomeIcon, Cigarette, Dog } from 'lucide-react';
-
-const mockRoommateMatches = [
-  {
-    id: '1',
-    firstName: 'Ahmed',
-    age: 27,
-    job: 'Software Engineer',
-    city: 'Casablanca',
-    budgetMin: 400,
-    budgetMax: 600,
-    matchScore: 92,
-    bio: 'Clean, organized, and respectful. Love coding and gaming.',
-    smoking: false,
-    pets: false,
-    nightOwl: true,
-    clean: true,
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ahmed',
-  },
-  {
-    id: '2',
-    firstName: 'Sara',
-    age: 24,
-    job: 'Teacher',
-    city: 'Casablanca',
-    budgetMin: 350,
-    budgetMax: 550,
-    matchScore: 87,
-    bio: 'Love reading and yoga. Looking for a peaceful living environment.',
-    smoking: false,
-    pets: true,
-    nightOwl: false,
-    clean: true,
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sara',
-  },
-  {
-    id: '3',
-    firstName: 'Youssef',
-    age: 29,
-    job: 'Marketing Manager',
-    city: 'Casablanca',
-    budgetMin: 500,
-    budgetMax: 700,
-    matchScore: 85,
-    bio: 'Working professional, enjoy sports and traveling on weekends.',
-    smoking: false,
-    pets: false,
-    nightOwl: false,
-    clean: true,
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Youssef',
-  },
-  {
-    id: '4',
-    firstName: 'Fatima',
-    age: 26,
-    job: 'Graphic Designer',
-    city: 'Casablanca',
-    budgetMin: 400,
-    budgetMax: 650,
-    matchScore: 90,
-    bio: 'Creative and friendly. Love art, music, and cooking new recipes.',
-    smoking: false,
-    pets: true,
-    nightOwl: true,
-    clean: true,
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima',
-  },
-];
+import { mockRoommateMatches } from '@/data/mockMatches';
 
 const RoommateMatches = () => {
   const { t } = useTranslation();

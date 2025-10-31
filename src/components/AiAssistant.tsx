@@ -1,15 +1,24 @@
 import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Send, Sparkles } from 'lucide-react';
+import { MessageCircle, X, Send, Sparkles, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 import { useTranslation } from 'react-i18next';
+import OpenAI from 'openai';
+import { mockHousingMatches, mockRoommateMatches, HousingMatch, RoommateMatch } from '@/data/mockMatches';
+import { HousingMatchCard } from './HousingMatchCard';
+import { RoommateMatchCard } from './RoommateMatchCard';
+import { useToast } from '@/components/ui/use-toast';
 
 interface Message {
   id: string;
   role: 'user' | 'assistant';
   content: string;
   timestamp: Date;
+  matches?: {
+    type: 'housing' | 'roommate';
+    data: HousingMatch[] | RoommateMatch[];
+  };
 }
 
 export const AiAssistant = () => {
@@ -26,6 +35,13 @@ export const AiAssistant = () => {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
+  const { toast } = useToast();
+
+  // Initialize OpenAI - Using environment variable for security
+  const openai = new OpenAI({
+    apiKey: import.meta.env.VITE_OPENAI_API_KEY || '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',
+    dangerouslyAllowBrowser: true // Required for frontend use - NOT RECOMMENDED for production
+  });
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -49,17 +65,103 @@ export const AiAssistant = () => {
     setInput('');
     setIsTyping(true);
 
-    // TODO: Replace with actual AI integration
-    setTimeout(() => {
+    try {
+      // Prepare context data for AI
+      const contextData = {
+        housing: mockHousingMatches,
+        roommates: mockRoommateMatches
+      };
+
+      // Call OpenAI API
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [
+          { 
+            role: "system", 
+            content: `You are a helpful assistant for a roommate and housing matching platform. 
+            
+Available housing: ${JSON.stringify(mockHousingMatches.map(h => ({
+  title: h.title,
+  price: h.price,
+  city: h.city,
+  bedrooms: h.bedrooms,
+  bathrooms: h.bathrooms
+})))}
+
+Available roommates: ${JSON.stringify(mockRoommateMatches.map(r => ({
+  name: r.firstName,
+  age: r.age,
+  job: r.job,
+  city: r.city,
+  budget: `${r.budgetMin}-${r.budgetMax}`,
+  bio: r.bio
+})))}
+
+When users ask about roommates or housing, provide helpful suggestions based on their needs.
+At the end of your response, add EXACTLY one of these markers:
+- [SHOW_HOUSING] if they're looking for apartments/housing
+- [SHOW_ROOMMATES] if they're looking for roommates
+- [SHOW_BOTH] if they want both
+- [SHOW_NONE] if it's just a general question
+
+Be conversational, friendly, and helpful. Keep responses concise but informative.`
+          },
+          { role: "user", content: input }
+        ],
+      });
+
+      const aiResponse = completion.choices[0]?.message?.content || 'Sorry, I could not process that request.';
+      
+      // Parse the response to determine if we should show matches
+      let matchType: 'housing' | 'roommate' | 'both' | 'none' = 'none';
+      let cleanResponse = aiResponse;
+      
+      if (aiResponse.includes('[SHOW_HOUSING]')) {
+        matchType = 'housing';
+        cleanResponse = aiResponse.replace('[SHOW_HOUSING]', '').trim();
+      } else if (aiResponse.includes('[SHOW_ROOMMATES]')) {
+        matchType = 'roommate';
+        cleanResponse = aiResponse.replace('[SHOW_ROOMMATES]', '').trim();
+      } else if (aiResponse.includes('[SHOW_BOTH]')) {
+        matchType = 'both';
+        cleanResponse = aiResponse.replace('[SHOW_BOTH]', '').trim();
+      } else {
+        cleanResponse = aiResponse.replace('[SHOW_NONE]', '').trim();
+      }
+
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: 'This is a mock response. AI integration will be implemented soon!',
+        content: cleanResponse,
         timestamp: new Date(),
+        matches: matchType === 'housing' ? {
+          type: 'housing',
+          data: mockHousingMatches.slice(0, 3) // Show top 3 matches
+        } : matchType === 'roommate' ? {
+          type: 'roommate',
+          data: mockRoommateMatches.slice(0, 3) // Show top 3 matches
+        } : undefined
       };
+
       setMessages((prev) => [...prev, aiMessage]);
       setIsTyping(false);
-    }, 1500);
+    } catch (error) {
+      console.error('Error calling OpenAI:', error);
+      setIsTyping(false);
+      toast({
+        title: "Error",
+        description: "Failed to get AI response. Please check your API key.",
+        variant: "destructive"
+      });
+      
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: 'Sorry, I encountered an error. Please try again.',
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -118,39 +220,59 @@ export const AiAssistant = () => {
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {messages.map((message) => (
-            <div
-              key={message.id}
-              className={cn(
-                'flex',
-                message.role === 'user' ? 'justify-end' : 'justify-start'
-              )}
-            >
+            <div key={message.id} className="space-y-3">
               <div
                 className={cn(
-                  'max-w-[80%] rounded-2xl px-4 py-2.5 shadow-sm',
-                  message.role === 'user'
-                    ? 'bg-primary text-primary-foreground rounded-br-sm'
-                    : 'bg-muted text-foreground rounded-bl-sm'
+                  'flex',
+                  message.role === 'user' ? 'justify-end' : 'justify-start'
                 )}
               >
-                <p className="text-sm whitespace-pre-wrap break-words">{message.content}</p>
-                <span className="text-[10px] opacity-60 mt-1 block">
-                  {message.timestamp.toLocaleTimeString([], {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  })}
-                </span>
+                <div
+                  className={cn(
+                    'max-w-[80%] rounded-2xl px-4 py-2.5 shadow-sm',
+                    message.role === 'user'
+                      ? 'bg-primary text-primary-foreground rounded-br-sm'
+                      : 'bg-muted text-foreground rounded-bl-sm'
+                  )}
+                >
+                  <p className="text-sm whitespace-pre-wrap break-words">{message.content}</p>
+                  <span className="text-[10px] opacity-60 mt-1 block">
+                    {message.timestamp.toLocaleTimeString([], {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
+                  </span>
+                </div>
               </div>
+
+              {/* Display match cards if available */}
+              {message.matches && message.role === 'assistant' && (
+                <div className="pl-2 space-y-2">
+                  {message.matches.type === 'housing' && (
+                    <div className="grid grid-cols-1 gap-2">
+                      {(message.matches.data as HousingMatch[]).map((housing) => (
+                        <HousingMatchCard key={housing.id} housing={housing} />
+                      ))}
+                    </div>
+                  )}
+                  {message.matches.type === 'roommate' && (
+                    <div className="grid grid-cols-1 gap-2">
+                      {(message.matches.data as RoommateMatch[]).map((roommate) => (
+                        <RoommateMatchCard key={roommate.id} roommate={roommate} />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           ))}
 
           {isTyping && (
             <div className="flex justify-start">
               <div className="bg-muted text-foreground rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm">
-                <div className="flex gap-1">
-                  <div className="w-2 h-2 bg-foreground/40 rounded-full animate-bounce [animation-delay:-0.3s]" />
-                  <div className="w-2 h-2 bg-foreground/40 rounded-full animate-bounce [animation-delay:-0.15s]" />
-                  <div className="w-2 h-2 bg-foreground/40 rounded-full animate-bounce" />
+                <div className="flex gap-1 items-center">
+                  <Loader2 className="h-4 w-4 animate-spin text-primary" />
+                  <span className="text-xs text-muted-foreground ml-2">AI is thinking...</span>
                 </div>
               </div>
             </div>
@@ -180,7 +302,7 @@ export const AiAssistant = () => {
             </Button>
           </div>
           <p className="text-[10px] text-muted-foreground mt-2 text-center">
-            AI integration coming soon
+            ⚠️ Try: "Show me apartments in Casablanca" or "Find me a roommate"
           </p>
         </div>
       </div>

@@ -5,61 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { motion } from 'framer-motion';
 import { Home, MapPin, Bed, Bath, Wifi, Car, Heart, MessageCircle, Star } from 'lucide-react';
-
-const mockHousingMatches = [
-  {
-    id: '1',
-    title: '2 Bedroom Apartment in Centre',
-    price: 4500,
-    city: 'Casablanca',
-    bedrooms: 2,
-    bathrooms: 1,
-    wifi: true,
-    parking: true,
-    furnished: true,
-    matchScore: 95,
-    image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop',
-  },
-  {
-    id: '2',
-    title: 'Modern Studio Apartment',
-    price: 3800,
-    city: 'Casablanca',
-    bedrooms: 1,
-    bathrooms: 1,
-    wifi: true,
-    parking: false,
-    furnished: true,
-    matchScore: 88,
-    image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop',
-  },
-  {
-    id: '3',
-    title: '3 Bedroom Family Apartment',
-    price: 6000,
-    city: 'Casablanca',
-    bedrooms: 3,
-    bathrooms: 2,
-    wifi: true,
-    parking: true,
-    furnished: false,
-    matchScore: 82,
-    image: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&h=600&fit=crop',
-  },
-  {
-    id: '4',
-    title: 'Cozy 1 Bedroom Near Beach',
-    price: 4200,
-    city: 'Casablanca',
-    bedrooms: 1,
-    bathrooms: 1,
-    wifi: true,
-    parking: true,
-    furnished: true,
-    matchScore: 90,
-    image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop',
-  },
-];
+import { mockHousingMatches } from '@/data/mockMatches';
 
 const HousingMatches = () => {
   const { t } = useTranslation();
