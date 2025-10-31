@@ -25,7 +25,7 @@ export const Header = () => {
             <img 
               src={logoFlatmate} 
               alt="FlatMate - Finding Your Housemate" 
-              className="h-16 w-auto object-contain"
+              className="h-24 w-auto object-contain"
             />
           </Link>
         </div>
