@@ -129,6 +129,11 @@
     "photos": "Photos",
     "uploadPhoto": "Télécharger une photo"
   },
+  "recommendations": "Recommandations",
+  "recommendations_subtitle": "Avis réels de notre communauté. Aidez les autres à prendre des décisions éclairées concernant leur prochain colocataire ou logement.",
+  "roommate_reviews": "Avis sur les Colocataires",
+  "housing_reviews": "Avis sur les Logements",
+  "average": "moyenne",
   "common": {
     "loading": "Chargement...",
     "error": "Une erreur s'est produite",

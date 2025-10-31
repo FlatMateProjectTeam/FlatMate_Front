@@ -74,7 +74,7 @@ export const MobileNav = () => {
                 onClick={() => handleNavigation('/recommendations')}
               >
                 <Star className="h-5 w-5" />
-                {t('nav.reviews') || 'Reviews'}
+                {t('recommendations') || 'Recommendations'}
               </Button>
               <Button
                 variant="ghost"

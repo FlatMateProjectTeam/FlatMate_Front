@@ -50,7 +50,7 @@ export const Header = () => {
                 <Button variant="ghost">{t('nav.messages')}</Button>
               </Link>
               <Link to="/recommendations">
-                <Button variant="ghost">{t('nav.reviews') || 'Reviews'}</Button>
+                <Button variant="ghost">{t('recommendations') || 'Recommendations'}</Button>
               </Link>
               <Link to="/preferences">
                 <Button variant="ghost">{t('nav.preferences')}</Button>

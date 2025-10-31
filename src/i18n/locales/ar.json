@@ -129,6 +129,11 @@
     "photos": "الصور",
     "uploadPhoto": "رفع صورة"
   },
+  "recommendations": "التوصيات",
+  "recommendations_subtitle": "مراجعات حقيقية من مجتمعنا. ساعد الآخرين على اتخاذ قرارات مستنيرة بشأن شريك السكن أو المسكن التالي.",
+  "roommate_reviews": "مراجعات شركاء السكن",
+  "housing_reviews": "مراجعات المساكن",
+  "average": "متوسط",
   "common": {
     "loading": "جاري التحميل...",
     "error": "حدث خطأ",

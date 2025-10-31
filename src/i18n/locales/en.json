@@ -129,6 +129,11 @@
     "photos": "Photos",
     "uploadPhoto": "Upload Photo"
   },
+  "recommendations": "Recommendations",
+  "recommendations_subtitle": "Real reviews from our community. Help others make informed decisions about their next roommate or housing.",
+  "roommate_reviews": "Roommate Reviews",
+  "housing_reviews": "Housing Reviews",
+  "average": "average",
   "common": {
     "loading": "Loading...",
     "error": "An error occurred",
