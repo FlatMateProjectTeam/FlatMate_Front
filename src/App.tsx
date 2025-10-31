@@ -19,6 +19,7 @@ import HousingMatches from './pages/HousingMatches';
 import RoommateMatches from './pages/RoommateMatches';
 import Messages from './pages/Messages';
 import Profile from './pages/Profile';
+import Recommendations from './pages/Recommendations';
 import NotFound from './pages/NotFound';
 
 import './i18n/config';
@@ -101,6 +102,14 @@ const AppContent = () => {
           element={
             <ProtectedRoute>
               <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/recommendations"
+          element={
+            <ProtectedRoute>
+              <Recommendations />
             </ProtectedRoute>
           }
         />

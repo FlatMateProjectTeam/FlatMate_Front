@@ -10,7 +10,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { Menu, Home, LayoutDashboard, Heart, MessageSquare, Settings, User, LogOut } from 'lucide-react';
+import { Menu, Home, LayoutDashboard, Heart, MessageSquare, Settings, User, LogOut, Star } from 'lucide-react';
 
 export const MobileNav = () => {
   const { t } = useTranslation();
@@ -67,6 +67,14 @@ export const MobileNav = () => {
               >
                 <MessageSquare className="h-5 w-5" />
                 {t('nav.messages')}
+              </Button>
+              <Button
+                variant="ghost"
+                className="justify-start gap-3"
+                onClick={() => handleNavigation('/recommendations')}
+              >
+                <Star className="h-5 w-5" />
+                {t('nav.reviews') || 'Reviews'}
               </Button>
               <Button
                 variant="ghost"

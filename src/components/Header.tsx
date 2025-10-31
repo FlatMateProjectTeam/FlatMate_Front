@@ -49,6 +49,9 @@ export const Header = () => {
               <Link to="/messages">
                 <Button variant="ghost">{t('nav.messages')}</Button>
               </Link>
+              <Link to="/recommendations">
+                <Button variant="ghost">{t('nav.reviews') || 'Reviews'}</Button>
+              </Link>
               <Link to="/preferences">
                 <Button variant="ghost">{t('nav.preferences')}</Button>
               </Link>
