@@ -4,8 +4,9 @@ import { useAppStore } from '@/store/useAppStore';
 import { Button } from '@/components/ui/button';
 import { LanguageSelector } from './LanguageSelector';
 import { MobileNav } from './MobileNav';
-import { Home, LogOut } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 import { motion } from 'framer-motion';
+import logoFlatmate from '@/assets/logo-flatmate.jpg';
 
 export const Header = () => {
   const { t } = useTranslation();
@@ -20,9 +21,12 @@ export const Header = () => {
       <div className="container flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-2">
           <MobileNav />
-          <Link to="/" className="flex items-center gap-2">
-            <Home className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold text-gradient">FlatMate</span>
+          <Link to="/" className="flex items-center">
+            <img 
+              src={logoFlatmate} 
+              alt="FlatMate - Finding Your Housemate" 
+              className="h-10 w-auto object-contain"
+            />
           </Link>
         </div>
 
