@@ -39,7 +39,7 @@ export const AiAssistant = () => {
 
   // Initialize OpenAI - Using environment variable for security
   const openai = new OpenAI({
-    apiKey: import.meta.env.VITE_OPENAI_API_KEY || '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',
+    apiKey: import.meta.env.VITE_OPENAI_API_KEY || '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',
     dangerouslyAllowBrowser: true // Required for frontend use - NOT RECOMMENDED for production
   });
 
