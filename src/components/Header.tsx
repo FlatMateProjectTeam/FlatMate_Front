@@ -19,24 +19,17 @@ export const Header = () => {
       className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
     >
       <div className="container flex h-16 items-center justify-between px-4">
-  <div className="flex items-center gap-2">
-    <MobileNav />
-    <Link to="/" className="flex items-center">
-      <img
-        src={logoFlatmate}
-        alt="FlatMate - Finding Your Housemate"
-        className="
-          h-10 md:h-12 lg:h-14
-          w-auto
-          object-contain
-          transition-all
-          duration-300
-          hover:scale-105
-        "
-      />
-    </Link>
-  </div>
-</div>
+        <div className="flex items-center gap-2">
+          <MobileNav />
+          <Link to="/" className="flex items-center">
+            <img 
+              
+              src={logoFlatmate} 
+              alt="FlatMate - Finding Your Housemate" 
+              className="h-24 w-auto object-contain"
+            />
+          </Link>
+        </div>
 
         <nav className="hidden md:flex items-center gap-6">
           {isAuthenticated ? (
