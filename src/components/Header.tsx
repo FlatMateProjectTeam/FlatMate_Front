@@ -6,7 +6,7 @@ import { LanguageSelector } from './LanguageSelector';
 import { MobileNav } from './MobileNav';
 import { LogOut } from 'lucide-react';
 import { motion } from 'framer-motion';
-import logoFlatmate from '@/assets/logo-flatmate.jpg';
+import logoFlatmate from '@/assets/logo-flatmate.png';
 
 export const Header = () => {
   const { t } = useTranslation();
