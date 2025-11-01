@@ -106,77 +106,9 @@ Be conversational, friendly, and helpful. Keep responses concise but informative
         cleanResponse = aiResponse.replace('[SHOW_NONE]', '').trim();
       }
 
-      // Fetch matches from backend if needed
-      let housingData: HousingMatch[] = [];
-      let roommateData: RoommateMatch[] = [];
-      const userId = "1"; // TODO: Get from auth context
-      const baseUrl = import.meta.env.VITE_API_BASE;
-
-      if (matchType === 'housing' || matchType === 'both') {
-        try {
-          const response = await fetch(`${baseUrl}/api/matching/housing/${userId}`);
-          if (response.ok) {
-            const data = await response.json();
-            // Transform backend response to match frontend structure
-            housingData = data.matches.map((match: any) => ({
-              id: match.logementId,
-              title: match.address,
-              image: match.pictureUrl || 'https://picsum.photos/400/300',
-              price: match.price,
-              city: match.address.split(' ')[0],
-              bedrooms: 2, // Default values as backend doesn't provide these
-              bathrooms: 1,
-              wifi: true,
-              parking: true,
-              matchScore: match.score,
-              ownerName: match.ownerName
-            }));
-          }
-        } catch (error) {
-          console.error('Error fetching housing matches:', error);
-          toast({
-            title: "Error",
-            description: "Failed to fetch housing matches from backend.",
-            variant: "destructive"
-          });
-        }
-      }
-
-      if (matchType === 'roommate' || matchType === 'both') {
-        try {
-          const response = await fetch(`${baseUrl}/api/match/roommates/${userId}`);
-          if (response.ok) {
-            const data = await response.json();
-            // Transform backend response to match frontend structure
-            roommateData = data.matches.map((match: any) => ({
-              id: match.candidateId,
-              firstName: `Candidate ${match.candidateId}`,
-              avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + match.candidateId,
-              age: 25, // Default values as backend doesn't provide these
-              job: 'Professional',
-              city: 'Rabat',
-              bio: match.recommendation,
-              budgetMin: 2000,
-              budgetMax: 4000,
-              preferences: {
-                smoking: false,
-                pets: false,
-                sleepSchedule: 'early-bird'
-              },
-              matchScore: match.score,
-              compatibilityLabel: match.compatibilityLabel,
-              matchReasons: match.reasons
-            }));
-          }
-        } catch (error) {
-          console.error('Error fetching roommate matches:', error);
-          toast({
-            title: "Error",
-            description: "Failed to fetch roommate matches from backend.",
-            variant: "destructive"
-          });
-        }
-      }
+      // Use mock data for matches
+      const housingData = matchType === 'housing' || matchType === 'both' ? mockHousingMatches.slice(0, 3) : [];
+      const roommateData = matchType === 'roommate' || matchType === 'both' ? mockRoommateMatches.slice(0, 3) : [];
 
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
