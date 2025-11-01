@@ -1,16 +1,26 @@
+# ---------- Build (Vite) ----------
 ARG ARCH=linux/amd64
+
 FROM --platform=$ARCH node:20-alpine AS build
 WORKDIR /app
+
 COPY package*.json ./
 RUN npm ci
+
 COPY . .
 ARG VITE_API_BASE
 ENV VITE_API_BASE=${VITE_API_BASE}
+
 RUN npm run build
 
+# ---------- Runtime (Nginx SANS Basic Auth) ----------
 FROM --platform=$ARCH nginx:alpine
 WORKDIR /usr/share/nginx/html
+
+# Copie du build
 COPY --from=build /app/dist ./
+
+# Ecrase la conf par défaut (pas d'auth)
 RUN printf '%s\n' \
   'server {' \
   '  listen 8080;' \
@@ -25,5 +35,6 @@ RUN printf '%s\n' \
   '    expires 7d;' \
   '  }' \
   '}' > /etc/nginx/conf.d/default.conf
+
 EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]

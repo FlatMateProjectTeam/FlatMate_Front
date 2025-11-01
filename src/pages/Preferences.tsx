@@ -12,10 +12,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { motion } from 'framer-motion';
 import { toast } from 'react-hot-toast';
 import { Users, Home, Loader2 } from 'lucide-react';
+import { useAppStore } from '@/store/useAppStore';
+import { preferencesAPI, matchesAPI } from '@/services/api';
+import type { RoommateMatchResponse, LogementMatchResponse } from '@/services/api';
 
 const Preferences = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { user } = useAppStore();
   const [activeTab, setActiveTab] = useState<'roommate' | 'housing'>('roommate');
   const [isLoading, setIsLoading] = useState(false);
   
@@ -37,19 +41,74 @@ const Preferences = () => {
   });
 
   const handleSave = async () => {
+    if (!user?.id) {
+      toast.error(t('common.error') || 'Vous devez être connecté');
+      return;
+    }
+
     setIsLoading(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    toast.success(t('common.success'));
-    setIsLoading(false);
-    
-    // Navigate to appropriate matches page
-    if (activeTab === 'housing') {
-      navigate('/housing-matches');
-    } else {
-      navigate('/roommate-matches');
+    try {
+      const userId = user.id;
+
+      // Conversion des préférences frontend vers le format backend
+      const roommatePrefsDto = {
+        pets: roommatePrefs.petsAllowed,
+        smoking: roommatePrefs.smoking,
+        socialLevel: roommatePrefs.sociability,
+        // Note: Les autres champs peuvent être ajoutés selon le besoin
+      };
+
+      const housingPrefsDto = {
+        address: housingPrefs.city,
+        budget: (housingPrefs.budgetMin + housingPrefs.budgetMax) / 2,
+        rooms: housingPrefs.bedrooms,
+        furnished: housingPrefs.furnished,
+      };
+
+      // Appels API parallèles : sauvegarder préférences ET précharger les matches
+      if (activeTab === 'housing') {
+        // Appels parallèles pour logement
+        const [prefsResult, matchesResult] = await Promise.all([
+          preferencesAPI.saveLogement(userId, housingPrefsDto),
+          matchesAPI.getHousingMatches(userId)
+        ]);
+        
+        toast.success(t('common.success') || 'Préférences enregistrées');
+        
+        // Naviguer avec les données préchargées
+        navigate('/housing-matches', { 
+          state: { matches: matchesResult.matches || [] } 
+        });
+      } else {
+        // Appels parallèles pour roommate
+        const [prefsResult, matchesResult] = await Promise.all([
+          preferencesAPI.saveColocataires(userId, roommatePrefsDto),
+          matchesAPI.getRoommateMatches(userId)
+        ]);
+        
+        toast.success(t('common.success') || 'Préférences enregistrées');
+        
+        // Naviguer avec les données préchargées
+        navigate('/roommate-matches', { 
+          state: { matches: matchesResult.matches || [] } 
+        });
+      }
+    } catch (error) {
+      console.error('Error saving preferences:', error);
+      let errorMessage = t('common.error') || 'Une erreur est survenue';
+      
+      if (error instanceof Error) {
+        errorMessage = error.message;
+        // Si c'est une erreur CORS ou réseau
+        if (error.message.includes('Failed to fetch') || error.message.includes('CORS')) {
+          errorMessage = 'Erreur de connexion au serveur. Vérifiez que le backend est démarré et que CORS est configuré.';
+        }
+      }
+      
+      toast.error(errorMessage);
+    } finally {
+      setIsLoading(false);
     }
   };
 
